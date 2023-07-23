@@ -121,7 +121,7 @@ i {
 [data-theme="light"] {
   --primary: #ca72ee;
   --background: #f422ad;
-  --background-image: url(imagenes/pink.gif);
+  --background-image: url(imagenes/7153031.jpg);
   --text: #244269;
   --icono: #ff00e4;
   --btn: #49ff00;
@@ -133,7 +133,7 @@ i {
 [data-theme="dark"] {
   --primary: #283149;
   --background: #244269;
-  --background-image: url(imagenes/black.gif);
+  --background-image: url(imagenes/3047572.jpg);
   --text: #f422ad;
   --icono: #f70776;
   --btn: #ffb830;
