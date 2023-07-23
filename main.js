@@ -1,12 +1,12 @@
-// boton switch para  dark o light
-/* con window,  obtengo el color preferido del usuario*/
+// <<<<<<<<boton switch para  dark o light>>>>>>>>>>>>>>>>>>>>
+/* con window,  obtengo el color preferido del usuario con .matches, si es dark, me devuelve true, segun el windows. sino tiene nada guardado es light*/
 const preferedColorScheme = window.matchMedia("(prefers-color-scheme: dark)")
   .matches
   ? "dark"
   : "light";
 const slider = document.getElementById("slider");
 
-/*seteo el data-theme para obtener dark o light*/
+/*seteo con el slider el data-theme para obtener dark o light*/
 const setTheme = (theme) => {
   document.documentElement.setAttribute(
     "data-theme",
@@ -23,12 +23,21 @@ setTheme(
   localStorage.getItem("theme") || preferedColorScheme
 ); /*miro si ya tiene guardada una referencia, si no tiene nada guardado porque es la 1ra vez, voy a usar preferedColorSchheme, es decir, dark o light*/
 
+/*me sirve para que si actualizo la pagina, me guarde el modo*/
 slider.addEventListener("click", () => {
   let switchToTheme =
-    localStorage.getItem("theme") === "dark" ? "light" : "dark";
+    localStorage.getItem("theme") === "dark"
+      ? "light" 
+      : "dark"; /* lo que esta en el localstorage, voy a obtener con getItem el theme, si este theme es igual a dark, voy a usar el contrario, osea light y viceversa */
   setTheme(switchToTheme);
   slider.classList.toggle("active");
+   
+
+
 });
+
+
+
 
 document.addEventListener("DOMContentLoaded", () => {
   //DECLARACION DE VARIABLES
@@ -282,21 +291,20 @@ document.addEventListener("DOMContentLoaded", () => {
   downloadButton.addEventListener("click", () => downloadMeme());
 
   const downloadMeme = () => {
-    /*domtoimage es una biblioteca JavaScript que se utiliza para convertir elementos DOM (Document Object Model) en imágenes. Permite tomar un elemento HTML y convertirlo en una imagen en formato Blob o Data URL, lo que facilita la descarga o visualización del contenido generado.*/
+    /*domtoimage es una biblioteca JavaScript que se utiliza para convertir 
+    elementos DOM (Document Object Model) en imágenes. Permite tomar un 
+    elemento HTML y convertirlo en una imagen en formato Blob o Data URL, 
+    lo que facilita la descarga o visualización del contenido generado.*/
     domtoimage.toBlob(meme).then(function (blob) {
       window.saveAs(blob, "mi-meme.png");
     });
   };
-  
-
-
-
 
 
   
 
 
-  //>>>>>>>>>>>>>>>>>>me oculta panel imagen cuando presiono el boton texto
+  //>>>>>>>>>>>>>>>>>>me oculta panel imagen cuando presiono el boton texto>>>>>>>>>>>>>>>
   btnPanelText.addEventListener("click", () => {
     panelTexto.classList.remove("hidden");
     panelImg.classList.add("hidden");
@@ -372,7 +380,7 @@ document.addEventListener("DOMContentLoaded", () => {
   // agrega el evento "change" al select para actualizar el tamaño de letra
   sizeSelect.addEventListener("change", applyFontSize);
 
-  //<<<<<<<<<<<<<<<<<<<justificacion de texto, no funciona!!>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+  //<<<<<<<<<<<<<<<<<<<justificacion de texto>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
   const btnIzq = document.getElementById("izq");
   btnIzq.addEventListener("click", () => {
     textMeme.style.textAlign = "left";
@@ -419,7 +427,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   });
 
-  //<<<<<<<<<<<contorno textos, no funciona!>>>>>>>>>>>>
+  //<<<<<<<<<<<contorno textos>>>>>>>>>>>>
   const textMeme = document.querySelector(".text-meme");
   btnNinguno.addEventListener("click", () => {
     textMeme.classList.remove("contorno-claro");
@@ -469,15 +477,28 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 
   //<<<<<<<<<<<cerrar panel, NO FUNCIONA! >>>>>>>>>>>>>>>>
+  function ocultarPaneles() {
+    const paneles = document.querySelectorAll(".panel");
+    paneles.forEach((panel) => {
+      if (panel.classList.contains("activo")) {
+        panel.classList.remove("activo"); // Remover la clase .activo del panel actualmente mostrado
+        panel.classList.add("oculto");
+      }
+    });
+  }
+  
   // Obtener el botón y el panel por sus IDs
   const panelCloseButton = document.getElementById("panel-close-button");
 
-  // Agregar un event listener al botón para ocultar el panel
   panelCloseButton.addEventListener("click", () => {
-    // Ocultar el panel al agregar la clase "oculto"
-    panel.classList.add("oculto");
+    ocultarPaneles();
   });
+  
 
+
+
+ 
+  
   //<<<<<<<<<<<<<<<<<<<ocultar paneles, segun en cual me posiciono>>>>>>>>>>
   //obtenemos los elementos de los botones y paneles
   const panel = document.getElementById("panel");
@@ -490,6 +511,8 @@ document.addEventListener("DOMContentLoaded", () => {
     panelTexto.classList.add("oculto");
     panelTextoVisible = false;
     panel.classList.toggle("oculto");
+    panel.classList.add("activo"); // Agregar la clase .activo al panel actualmente mostrado
+
   });
 
   // event listener para mostrar/ocultar el panel de texto
@@ -498,6 +521,8 @@ document.addEventListener("DOMContentLoaded", () => {
       panel.classList.add("oculto");
       panelTextoVisible = true;
       panelTexto.classList.remove("oculto");
+      panelTexto.classList.add("activo"); // Agregar la clase .activo al panel actualmente mostrado
+
     }
   });
 });

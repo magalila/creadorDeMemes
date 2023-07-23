@@ -116,7 +116,7 @@ i {
 
 /*<<<<<<<<<<<<<  SWITCH >>>>>>>>>>>>>>>>*/
 
-/*creo un selector*/
+/*creo un selector para declarar lo qeu va a cambiar cuando cambie de modo*/
 /*color claro, con sus variables que cambiaran cuando este modo claro*/
 [data-theme="light"] {
   --primary: #ca72ee;
@@ -185,6 +185,7 @@ h1 {
   padding-top: 7px;
   padding-left: 7px;
 }
+
 .slider {
   position: absolute;
   cursor: pointer;
@@ -198,6 +199,7 @@ h1 {
   border-radius: 34px;
 }
 
+/*pelotita del slider*/
 .slider:before {
   position: absolute;
   content: "";
@@ -296,12 +298,17 @@ input:checked + .slider:before {
   size: 2px;
   background: transparent;
   border: none;
-  margin-left: 145px;
-  margin-top: 5px;
+  display: flex;
+  justify-content: end;
+  align-items: center;
+  top: 15px;
+  right: 15px;
+  border-radius: 3px;
+  cursor: pointer;
+  margin-right: 25px;
+  margin-top: 15px;
 }
-.cerrar:hover {
-  background-color: var(--barra);
-}
+
 .hidden {
   display: none;
 }
@@ -383,8 +390,6 @@ input,
   -webkit-text-stroke: 0px rgb(9, 9, 9); /* Contorno blanco de 2px */
   text-stroke: 0px rgb(9, 9, 9);
 }
-
-
 
 /*<<<<<<<<<<<<<<RESPONSIVE>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 /* Estilos para dimensiones inferiores a 425x621 */
